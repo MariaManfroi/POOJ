@@ -58,43 +58,28 @@ public class Simulador {
             }
         }
 
-        // Exibir resumo geral
         double totalImoveis = 0;
-        double totalParcelas = 0;
+        double totalParcelasMensais = 0;
+        double totalGeralPago = 0;
 
         System.out.println("\n=== Resumo Geral dos Financiamentos ===");
 
         for (Financiamento f : financiamentos) {
-            System.out.println(f.resumo());
-            totalImoveis += f.valorImovel;
-            totalParcelas += f.calcularParcelas();
+            double parcela = f.calcularParcelas();
+            double totalPago = parcela * f.getMeses();
+
+            System.out.printf("%s | Total pago: R$%.2f\n", f.resumo(), totalPago);
+
+            totalImoveis += f.getValorImovel();
+            totalParcelasMensais += parcela;
+            totalGeralPago += totalPago;
         }
 
         System.out.printf("\nTotal de imóveis financiados: %d\n", financiamentos.size());
         System.out.printf("Soma dos valores dos imóveis: R$ %.2f\n", totalImoveis);
-        System.out.printf("Soma das parcelas mensais: R$ %.2f\n", totalParcelas);
+        System.out.printf("Soma das parcelas mensais: R$ %.2f\n", totalParcelasMensais);
+        System.out.printf("Valor total a ser pago por todos os financiamentos (somando meses): R$ %.2f\n", totalGeralPago);
 
         sc.close();
     }
 }
-double totalImoveis = 0;
-double totalParcelasMensais = 0;
-double totalGeralPago = 0;
-
-System.out.println("\n=== Resumo Geral dos Financiamentos ===");
-
-for (Financiamento f : financiamentos) {
-    double parcela = f.calcularParcelas();
-    double totalPago = parcela * f.meses;
-
-    System.out.printf("%s | Total pago: R$%.2f\n", f.resumo(), totalPago);
-
-    totalImoveis += f.valorImovel;
-    totalParcelasMensais += parcela;
-    totalGeralPago += totalPago;
-}
-
-System.out.printf("\nTotal de imóveis financiados: %d\n", financiamentos.size());
-System.out.printf("Soma dos valores dos imóveis: R$ %.2f\n", totalImoveis);
-System.out.printf("Soma das parcelas mensais: R$ %.2f\n", totalParcelasMensais);
-System.out.printf("Valor total a ser pago por todos os financiamentos (somando meses): R$ %.2f\n", totalGeralPago);

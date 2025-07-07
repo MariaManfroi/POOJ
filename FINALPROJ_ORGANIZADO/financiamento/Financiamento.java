@@ -12,6 +12,14 @@ public abstract class Financiamento {
         this.taxaAnual = taxaAnual;
     }
 
+    public double getValorImovel() {
+        return valorImovel;
+    }
+
+    public int getMeses() {
+        return meses;
+    }
+
     public abstract double calcularParcelas();
 
     public String resumo() {
